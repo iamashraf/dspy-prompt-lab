@@ -6,6 +6,7 @@ optimizer to it: one that cannot beat this is not worth its cost.
 Run:  uv run python examples/09_labeled_fewshot.py
 Cost: 35,038 prompt + 958 completion tokens, 2 min on a local 30B model (Ollama).
       Multiply by your provider's token prices for a hosted model.
+      On Anthropic claude-haiku-5-5 (one run): 53,766 prompt + 3,889 completion tokens, 17 s.
 Debug: `compiled.predictors()[0].demos` lists the copied examples. The draw is seeded (random.Random(0)): same trainset, same demos, every run.
 Docs: https://dspy.ai/api/optimizers/LabeledFewShot/
 """

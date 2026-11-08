@@ -11,6 +11,7 @@ even when the chat model is Anthropic, which has no embeddings API.
 Run:  uv run python examples/11_knn_fewshot.py
 Cost: 26,119 prompt + 970 completion tokens, 2 min on a local 30B model (Ollama).
       Multiply by your provider's token prices for a hosted model.
+      On Anthropic claude-haiku-5-5 (one run): 40,199 prompt + 4,197 completion tokens, 17 s.
       This script asks for labeled neighbours only (max_bootstrapped_demos=0), so each ticket is one
       call. With DSPy's default (bootstrapped demos) the optimizer re-runs a mini-bootstrap for every
       query, about k+1 calls per ticket: 81,000 prompt tokens and 687 s in an earlier run.

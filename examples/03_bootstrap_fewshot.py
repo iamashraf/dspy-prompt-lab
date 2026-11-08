@@ -12,6 +12,7 @@ teaches what the model already knew. The hidden labeling rules live in the ticke
 Run:  uv run python examples/03_bootstrap_fewshot.py
 Cost: 62,063 prompt + 1,566 completion tokens, 3 min on a local 30B model (Ollama).
       Multiply by your provider's token prices for a hosted model.
+      On Anthropic claude-haiku-5-5 (one run): 94,651 prompt + 6,750 completion tokens, 42 s.
 Debug: if the log says "Bootstrapped 0 full traces", the metric rejected every run: test the metric by
        hand on one gold/prediction pair. Print `predictor.demos` to see what reached the prompt.
 Docs: https://dspy.ai/api/optimizers/BootstrapFewShot/
