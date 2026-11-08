@@ -70,8 +70,8 @@ The containment metric once passed that refusal, because the key `n` appears ins
 
 ## Debugging an LLM judge
 
-Read ten verdicts next to the reference answers. Run it twice. A judge whose verdicts flip between runs adds noise to every score. Judge with a different model from the one being judged when you can: set `DSPY_LAB_JUDGE_MODEL`.
+Read ten verdicts next to the reference answers. Run it twice. A judge whose verdicts flip between runs adds noise to every score. When you can, judge with a different model from the one being judged. Set `DSPY_LAB_JUDGE_MODEL`.
 
 ## Logging and secrets
 
-Do not turn on LiteLLM's own debug logging for shared logs. It can print request details, and this repo has not checked whether those include credentials. The run log and trace in this repo are built to avoid keys, and a test checks that the trace never contains one.
+Do not turn on LiteLLM's own debug logging for shared logs. It can print request details, and this repo has not checked whether those include credentials. The code avoids writing keys to the run log and the trace, and a test checks that the trace never contains one.

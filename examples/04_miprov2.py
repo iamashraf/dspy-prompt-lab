@@ -6,8 +6,8 @@ MIPROv2 does three things:
   3. searches over the (instruction, demos) combinations with Bayesian optimization,
      scoring each on a validation set.
 
-`auto="light"` picks a small search budget. This is the one to reach for when the task has
-rules the model has to be *told* (here: the labeling policy), not just shown.
+`auto="light"` picks a small search budget. Use it when the task has rules
+the model must be told, such as this repo's labeling policy, and not only shown.
 
 Run:  uv run python examples/04_miprov2.py
 Cost: 208,359 prompt + 7,283 completion tokens, 14 min on a local 30B model (Ollama).

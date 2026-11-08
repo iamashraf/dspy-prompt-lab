@@ -1,7 +1,7 @@
 """09. LabeledFewShot: the simplest optimizer. Copy k training examples into the prompt.
 
-No LM calls to compile, no metric. It picks k random labeled examples as demos. It is the floor
-to beat: if a fancier optimizer cannot beat this, it is not worth its cost.
+No LM calls to compile, no metric. It picks k random labeled examples as demos. Compare every other
+optimizer to it: one that cannot beat this is not worth its cost.
 
 Run:  uv run python examples/09_labeled_fewshot.py
 Cost: 35,038 prompt + 958 completion tokens, 2 min on a local 30B model (Ollama).

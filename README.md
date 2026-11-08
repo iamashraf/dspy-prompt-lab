@@ -9,7 +9,7 @@ The examples share one hand-written dataset, work with Ollama, OpenAI or Anthrop
 
 ## Quick start
 
-You need Python 3.12+ and [uv](https://docs.astral.sh/uv/). The default model runs locally on [Ollama](https://ollama.com), so no API key is needed.
+You need Python 3.12+ and [uv](https://docs.astral.sh/uv/). The default model runs locally on [Ollama](https://ollama.com), so you need no API key.
 
 ```bash
 git clone https://github.com/iamashraf/dspy-prompt-lab.git
@@ -56,7 +56,7 @@ The examples route support tickets for a made-up product, Tasklane, to one of si
 
 ## What the reference run found
 
-From a local `qwen3-coder:30b`, on 36 test tickets that start at 69.4%. Labeled demos did best, at 86.1%. The instruction optimizers wrote sensible general rules but never found the precedence rule. One ticket is 2.8 points, so gaps under about 8 points are noise. The full table and the limits are in [results](docs/results.md).
+From a local `qwen3-coder:30b`, on 36 test tickets that start at 69.4%. Labeled demos did best, at 86.1%. The instruction optimizers wrote general per-label rules and never found the precedence rule. One ticket is 2.8 points, so gaps under about 8 points are noise. The full table and the limits are in [results](docs/results.md).
 
 ## Documentation
 

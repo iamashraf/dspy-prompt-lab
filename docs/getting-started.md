@@ -5,7 +5,7 @@ This page gets one example running, then explains the setup choices. It takes ab
 ## Prerequisites
 
 - Python 3.12 or newer and [uv](https://docs.astral.sh/uv/).
-- One language model: a local one through [Ollama](https://ollama.com), or an OpenAI or Anthropic API key.
+- One language model, either a local one through [Ollama](https://ollama.com) or an OpenAI or Anthropic API key.
 - About 20 GB of free disk if you run a local 30B model, or about 5 GB for `llama3.1:8b`.
 
 ## Install

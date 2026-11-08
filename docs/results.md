@@ -1,6 +1,6 @@
 # Results
 
-These are the numbers from one run of every example, with the method and the limits you need to read them correctly. Do not treat this as a benchmark. It shows what the examples print and how much to trust it.
+This page gives the numbers from one run of every example, the method, and the limits. Do not treat this as a benchmark. It shows what the examples print and how much to trust it.
 
 ## Method
 

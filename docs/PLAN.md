@@ -37,5 +37,5 @@ optimizer has room to improve the score. The RAG examples use the same product's
 - Pin `engine="litellm"` in `dspy.LM`. DSPy 3.4 defaults to a native `lm15` engine, which returned
   HTTP 404 for Ollama here.
 - `optuna` is a dependency because `MIPROv2` imports it.
-- Offline tests use `DummyLM`. The examples are checked by running them.
+- Offline tests use `DummyLM`. Run the examples to check them.
 - No dataset downloads. All data is hand-written and in `data/`.

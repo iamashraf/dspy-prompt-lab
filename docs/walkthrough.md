@@ -36,7 +36,7 @@ These optimizers change the examples shown in the prompt and leave the instructi
 
 ### Step 3. Copy examples in (`09_labeled_fewshot.py`)
 
-`LabeledFewShot` copies 12 training tickets into the prompt. It makes no model calls to compile. Treat it as the floor.
+`LabeledFewShot` copies 12 training tickets into the prompt. It makes no model calls to compile. Every other optimizer should beat it.
 
 - Reference run. 83.3% from 69.4%, using 35,000 prompt tokens.
 - Look for how a free step beats the baseline by 14 points.
@@ -116,7 +116,7 @@ These optimizers rewrite the instruction text. They cost more and show you what 
 `GEPA` reads text feedback from your metric and rewrites the instruction from the mistakes. The metric here says which label the model chose, which was correct, and shows the ticket.
 
 - Reference run. 72.2%, up from 69.4%. The best of seven candidates scored 78% on dev, which again overstates test. It used 163,000 prompt tokens.
-- The instruction it wrote holds one real piece of the policy, learned from a mistake: a question about SAML SSO with Azure AD is `howto`, not `feature`, because Tasklane supports it. It did not find the precedence rule.
+- The instruction it wrote holds one real piece of the policy, learned from a mistake. A question about SAML SSO with Azure AD is `howto`, not `feature`, because Tasklane supports it. It did not find the precedence rule.
 - Try changing the feedback text to include a hint about precedence and see whether the result changes.
 
 ### Step 13. Learn from unstable examples (`13_simba.py`)

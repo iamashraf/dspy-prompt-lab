@@ -11,7 +11,7 @@ The labels follow a house policy that a model cannot know from the label names a
 1. When a ticket touches several topics, the first matching rule wins:
    `security` > `billing` > `account` > `bug` > `feature` > `howto`.
 2. `howto` is for things Tasklane can do. `feature` is for things it cannot.
-   It has: boards, custom-interval recurring tasks, CSV export, Slack, SAML SSO (Business plan),
+   It has boards, custom-interval recurring tasks, CSV export, Slack, SAML SSO (Business plan),
    guests, templates, authenticator-app 2FA, API tokens, archive restore (60 days), an audit log (Business).
    It does not have: Gantt or timeline views, time tracking, custom fields, dark mode, offline mode,
    Jira sync, PDF export, card dependencies, multiple assignees, a calendar view, email-to-card.
@@ -21,5 +21,5 @@ exists, which is where an untuned prompt goes wrong and an optimizer has somethi
 
 ## `help_docs.jsonl` and `help_qa.jsonl`: Tasklane help center
 
-15 short documents and 36 questions (12 need arithmetic or combining facts; those rows have `derived: true`) about them, used by the RAG examples. Each question has a
+15 short documents and 36 questions about them, for the RAG examples. Twelve questions need arithmetic or combining facts, and those rows have `derived: true`. Each question has a
 reference `answer`, a short `key` fact (for the cheap containment metric), and the `doc_id` it comes from.

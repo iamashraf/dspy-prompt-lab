@@ -56,4 +56,4 @@ Scores are the test score on 36 tickets with a local model, from a baseline of 6
 | `AvatarOptimizer` | Targets agents that call tools. This repo has no tool-using agent. |
 | `BootstrapFinetune`, `BetterTogether` | Train model weights. They need a GPU or a provider's fine-tuning API. |
 
-Docs: [optimizers overview](https://dspy.ai/learn/optimization/optimizers/). Per-optimizer API pages are linked in each example's docstring.
+Docs: [optimizers overview](https://dspy.ai/learn/optimization/optimizers/). Each example's docstring links the API page for its optimizer.
