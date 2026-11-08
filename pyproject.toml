@@ -1,0 +1,35 @@
+[project]
+name = "dspy-prompt-lab"
+version = "0.1.0"
+description = "Learn DSPy prompt optimization by running it: nine small examples, a shared dataset, and tests that need no API key."
+readme = "README.md"
+authors = [
+    { name = "Ashraf Mohammed", email = "55521155+iamashraf@users.noreply.github.com" }
+]
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+    "dspy>=3.4.1",
+    "numpy>=2.5.4",
+    "optuna>=5.0.0",
+    "python-dotenv>=1.2.4",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.4",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["F", "I", "UP", "B"]

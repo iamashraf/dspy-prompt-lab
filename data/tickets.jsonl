@@ -1,0 +1,108 @@
+{"ticket": "Our SSO stopped working after the renewal date passed. The card on file expired.", "label": "billing"}
+{"ticket": "Checklist items I tick on my phone are unticked when I open the desktop app.", "label": "bug"}
+{"ticket": "Can a recurring task use a custom interval, such as every 10 days?", "label": "howto"}
+{"ticket": "Please let us pin a board to the top of the sidebar.", "label": "feature"}
+{"ticket": "Someone is sending invitations from my account to people I don't know.", "label": "security"}
+{"ticket": "I can't invite new teammates because it says I'm out of seats, but we pay for 10. What is going on?", "label": "billing"}
+{"ticket": "Could you let us assign one card to two people?", "label": "feature"}
+{"ticket": "The mobile app shows cards in a different order than the browser. I'd like them to match.", "label": "bug"}
+{"ticket": "Can I see who opened my board? A competitor seems to know our roadmap.", "label": "security"}
+{"ticket": "The board is blank after I archive a column and refresh.", "label": "bug"}
+{"ticket": "Where do I change my email? The settings page only shows a spinner.", "label": "account"}
+{"ticket": "CSV export hangs at 100% and never downloads when the board has over 2,000 cards.", "label": "bug"}
+{"ticket": "I can't sign in with Google since my company changed domains.", "label": "account"}
+{"ticket": "How do I save my board setup so I can reuse it?", "label": "howto"}
+{"ticket": "The audit log vanished after we downgraded. Is that a bug?", "label": "billing"}
+{"ticket": "Can I get an audit log of changes on our boards?", "label": "howto"}
+{"ticket": "Any plan to support Microsoft Teams notifications like you do for Slack?", "label": "feature"}
+{"ticket": "How do I use recurring tasks? Mine keeps creating duplicates every time.", "label": "bug"}
+{"ticket": "The invoice lists 12 seats but we only use 9. Can we reduce?", "label": "billing"}
+{"ticket": "Do you support SAML SSO? We use Azure AD.", "label": "howto"}
+{"ticket": "Do you have a data processing agreement we can sign? Our legal team is asking.", "label": "security"}
+{"ticket": "I want to log in with my Microsoft account. Do you plan to support that?", "label": "account"}
+{"ticket": "The mobile app keeps logging me out and I can't get past the login screen on my phone.", "label": "account"}
+{"ticket": "Where is the dark theme setting? I can't find it in my profile.", "label": "feature"}
+{"ticket": "I received several SMS codes I never requested.", "label": "security"}
+{"ticket": "Where can I export all my cards to a spreadsheet?", "label": "howto"}
+{"ticket": "I was charged twice for my Team plan this month, please refund one.", "label": "billing"}
+{"ticket": "Our trial ended and now I can't edit boards. How do I pay?", "label": "billing"}
+{"ticket": "I'd like a refund because the Slack integration double-posts and my team stopped using it.", "label": "billing"}
+{"ticket": "How long do archived cards stay before they are gone?", "label": "howto"}
+{"ticket": "How do I invite a guest to just one board?", "label": "howto"}
+{"ticket": "Any plans for a native desktop app?", "label": "feature"}
+{"ticket": "Why is my renewal price higher than what I paid last year?", "label": "billing"}
+{"ticket": "I'd love a bulk edit option, but selecting many cards right now crashes the page.", "label": "bug"}
+{"ticket": "I can't switch between my two workspaces. It always opens the first one.", "label": "account"}
+{"ticket": "Can I change my display name? It shows my email in comments.", "label": "account"}
+{"ticket": "Is there a Gantt chart view? We need to show dependencies to clients.", "label": "feature"}
+{"ticket": "Notifications arrive about 20 minutes late. Could we get a setting for digest timing?", "label": "bug"}
+{"ticket": "Please add email-to-card so we can forward emails into a board.", "label": "feature"}
+{"ticket": "Can I turn on two-factor authentication with an authenticator app?", "label": "howto"}
+{"ticket": "I need to make another person the workspace owner and billing contact.", "label": "account"}
+{"ticket": "The receipt email shows the wrong company name.", "label": "billing"}
+{"ticket": "Can I invite a client to see one board only, without access to the rest?", "label": "howto"}
+{"ticket": "Can I use Tasklane offline on flights and have it sync later?", "label": "feature"}
+{"ticket": "Can the Slack integration leak private board names to other channels? Our auditor asked.", "label": "security"}
+{"ticket": "How do I add a custom field for budget on my cards?", "label": "feature"}
+{"ticket": "We were promised a nonprofit discount in January. How do I apply it?", "label": "billing"}
+{"ticket": "A new teammate says their invitation link has expired.", "label": "account"}
+{"ticket": "Is there a way to see every card I'm assigned to on a calendar?", "label": "feature"}
+{"ticket": "Can I limit who is allowed to connect Slack channels?", "label": "howto"}
+{"ticket": "My boards stopped loading and I noticed a login from a country I have never visited. Is the outage related?", "label": "security"}
+{"ticket": "The 'Save as template' option does nothing when I click it.", "label": "bug"}
+{"ticket": "Drag and drop between boards doesn't work in Firefox. Is there a workaround?", "label": "bug"}
+{"ticket": "How do I connect a Slack channel so new cards get posted there?", "label": "howto"}
+{"ticket": "I'd like different sprint lengths per board.", "label": "feature"}
+{"ticket": "I accidentally committed my API token to a public GitHub repo.", "label": "security"}
+{"ticket": "We'd like a calendar view of due dates.", "label": "feature"}
+{"ticket": "Invites to my teammates bounce back with an error.", "label": "account"}
+{"ticket": "Board load time has doubled since last week.", "label": "bug"}
+{"ticket": "Can I restore archived cards after a few weeks?", "label": "howto"}
+{"ticket": "How do I leave a workspace I was invited to?", "label": "account"}
+{"ticket": "How can I track time spent on each card?", "label": "feature"}
+{"ticket": "A contractor we removed last month still shows up in the activity log.", "label": "security"}
+{"ticket": "Can you merge my two accounts, one with my work email and one with my personal email?", "label": "account"}
+{"ticket": "Is there a cheaper plan for a team of two?", "label": "billing"}
+{"ticket": "Can you add an export to PDF? Only CSV is available right now.", "label": "feature"}
+{"ticket": "What is the shortcut to quickly add a card?", "label": "howto"}
+{"ticket": "I got locked out after changing phones and can't pass two-factor verification.", "label": "account"}
+{"ticket": "Our admin left the company and I think they still have our API tokens. How do we invalidate them?", "label": "security"}
+{"ticket": "Filtering by label shows archived cards too.", "label": "bug"}
+{"ticket": "How can I see all my cards on a timeline? I couldn't find such a view anywhere.", "label": "feature"}
+{"ticket": "The filter bar ignores my label selection. It would also be great if it remembered it.", "label": "bug"}
+{"ticket": "How do I set up Jira sync for our project?", "label": "feature"}
+{"ticket": "How do I set up SSO with Okta for our workspace?", "label": "howto"}
+{"ticket": "Where can I find the list of keyboard shortcuts?", "label": "howto"}
+{"ticket": "I want to add 5 more seats today. What will it cost prorated?", "label": "billing"}
+{"ticket": "We want to downgrade from Business to Team before the next renewal.", "label": "billing"}
+{"ticket": "How do I reset 2FA? My recovery codes don't work.", "label": "account"}
+{"ticket": "How do I revoke all API tokens? One was posted in our public Slack channel by mistake.", "label": "security"}
+{"ticket": "Why did my card get charged $48 when I only have 4 seats?", "label": "billing"}
+{"ticket": "How do I export my board to a spreadsheet file?", "label": "howto"}
+{"ticket": "Our security team needs to know where data is stored and whether it is encrypted at rest.", "label": "security"}
+{"ticket": "Attachments upload but the thumbnail stays blank.", "label": "bug"}
+{"ticket": "I can't log in anymore and the password reset email went to an address I don't recognize.", "label": "security"}
+{"ticket": "My recurring task 'Weekly report' skipped this Monday.", "label": "bug"}
+{"ticket": "How do I report a vulnerability? I think I found an XSS in the comments field.", "label": "security"}
+{"ticket": "Please refund my last charge. I never signed up for the Business plan and I think someone used my card on my account.", "label": "security"}
+{"ticket": "Can I save a board as a template for new projects?", "label": "howto"}
+{"ticket": "Can you send me a PDF invoice for March? Our accountant needs it.", "label": "billing"}
+{"ticket": "We found a way to read another workspace's board by editing the ID in the URL.", "label": "security"}
+{"ticket": "Please charge our company card instead of my personal one from next month.", "label": "billing"}
+{"ticket": "How do I hand over workspace ownership to the colleague taking over from me?", "label": "account"}
+{"ticket": "Uploading a PNG over 5 MB fails with 'Unknown error'.", "label": "bug"}
+{"ticket": "The login page says my session expired every few minutes.", "label": "account"}
+{"ticket": "I got a notification that my password was changed, but I never did that.", "label": "security"}
+{"ticket": "Is there a workload view that shows each teammate's cards across boards?", "label": "feature"}
+{"ticket": "How can I make a card depend on another? I couldn't find it anywhere.", "label": "feature"}
+{"ticket": "I got an email that looks like it's from Tasklane asking me to confirm my password. Is it real?", "label": "security"}
+{"ticket": "Your emails are being flagged as phishing by our mail filter and the links look odd.", "label": "security"}
+{"ticket": "Dragging a card between columns sometimes drops it back where it started.", "label": "bug"}
+{"ticket": "The mobile app crashes when I open a task with more than 10 attachments.", "label": "bug"}
+{"ticket": "My teammate was removed by mistake. How do I add them back?", "label": "account"}
+{"ticket": "How do I stop Slack from posting twice? It started yesterday.", "label": "bug"}
+{"ticket": "I forgot my password and the reset email never arrives.", "label": "account"}
+{"ticket": "Our workspace URL has a typo from when we created it. Can you rename it?", "label": "account"}
+{"ticket": "Can I get a discount if I pay for a year upfront? And how do I switch?", "label": "billing"}
+{"ticket": "How do I make a task repeat every second Friday?", "label": "howto"}
+{"ticket": "The CSV export button is greyed out since we downgraded. Is that expected?", "label": "billing"}

@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv
+.pytest_cache/
+.ruff_cache/
+
+# Secrets and local config: never commit these
+.env
+.env.local
+
+# Outputs of the examples
+artifacts/
+.dspy_cache/

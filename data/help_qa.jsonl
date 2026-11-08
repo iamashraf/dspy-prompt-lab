@@ -1,0 +1,36 @@
+{"question": "How long can archived cards be restored?", "answer": "60 days", "key": "60", "doc_id": "archive"}
+{"question": "Which plan is required for SAML SSO?", "answer": "The Business plan", "key": "business", "doc_id": "sso"}
+{"question": "How many API requests per minute does a token allow?", "answer": "60 requests per minute", "key": "60", "doc_id": "api"}
+{"question": "How many free guests does the Team plan include per workspace?", "answer": "Up to 5", "key": "5", "doc_id": "guests"}
+{"question": "What does the Team plan cost per seat per month when billed annually?", "answer": "$6", "key": "$6", "doc_id": "pricing"}
+{"question": "Which file format can a board be exported to?", "answer": "CSV only", "key": "csv", "doc_id": "csv"}
+{"question": "Where is data stored for EU workspaces?", "answer": "AWS eu-central-1 (Frankfurt)", "key": "frankfurt", "doc_id": "data"}
+{"question": "How long does an API token last by default?", "answer": "90 days", "key": "90", "doc_id": "api"}
+{"question": "What kind of app generates two-factor codes?", "answer": "An authenticator app", "key": "authenticator", "doc_id": "2fa"}
+{"question": "Within how many days of a charge can I get a refund?", "answer": "14 days", "key": "14", "doc_id": "refunds"}
+{"question": "Who can connect a Slack channel to a board?", "answer": "Workspace admins", "key": "admin", "doc_id": "slack"}
+{"question": "Which key adds a new card?", "answer": "N", "key": "n", "doc_id": "shortcuts"}
+{"question": "How many recovery codes are shown when setting up two-factor authentication?", "answer": "10", "key": "10", "doc_id": "2fa"}
+{"question": "How many months of events does the audit log keep?", "answer": "12 months", "key": "12", "doc_id": "audit"}
+{"question": "Which identity providers does SSO support?", "answer": "Okta, Azure AD and Google Workspace", "key": "okta", "doc_id": "sso"}
+{"question": "Which of these does a board template keep: recurring rules or comments?", "answer": "Recurring rules", "key": "recurring", "doc_id": "templates"}
+{"question": "When is the next card of a recurring task created?", "answer": "When the previous card is marked done", "key": "done", "doc_id": "recurring"}
+{"question": "How long does the download link for a large CSV export stay valid?", "answer": "24 hours", "key": "24", "doc_id": "csv"}
+{"question": "What is the maximum number of cards in one CSV export?", "answer": "10,000", "key": "10,000", "doc_id": "csv"}
+{"question": "How much does the Business plan cost per seat per month?", "answer": "$15", "key": "$15", "doc_id": "pricing"}
+{"question": "Where do I create an API token?", "answer": "Profile > Developer", "key": "developer", "doc_id": "api"}
+{"question": "After SSO is enabled, who can still log in with a password?", "answer": "Only the workspace owner", "key": "owner", "doc_id": "sso"}
+{"question": "Which cipher encrypts data at rest?", "answer": "AES-256", "key": "aes-256", "doc_id": "data"}
+{"question": "For how many days after purchase is an annual plan refunded pro rata?", "answer": "30 days", "key": "30", "doc_id": "refunds"}
+{"question": "How much do 8 Team seats cost per month when billed monthly?", "answer": "$64", "key": "$64", "doc_id": "pricing", "derived": true}
+{"question": "How much do 10 Business seats cost per month?", "answer": "$150", "key": "$150", "doc_id": "pricing", "derived": true}
+{"question": "A Team workspace has 7 guests. How many of them count as paid seats?", "answer": "2", "key": "2", "doc_id": "guests", "derived": true}
+{"question": "What is the monthly equivalent cost of 5 Team seats on annual billing?", "answer": "$30", "key": "$30", "doc_id": "pricing", "derived": true}
+{"question": "I bought an annual plan 20 days ago. What refund can I get?", "answer": "A pro rata refund", "key": "pro rata", "doc_id": "refunds"}
+{"question": "A CSV export of 3,000 cards was requested. How long is the download link valid?", "answer": "24 hours", "key": "24 hours", "doc_id": "csv"}
+{"question": "Which plan includes the audit log, and for how many months does it keep events?", "answer": "Business, 12 months", "key": "12 months", "doc_id": "audit"}
+{"question": "I lost the phone with my authenticator app. What can I use to log in?", "answer": "One of the 10 recovery codes", "key": "recovery code", "doc_id": "2fa"}
+{"question": "How many API requests per hour can one token make at the rate limit?", "answer": "3,600", "key": "3600", "doc_id": "api", "derived": true}
+{"question": "Is SAML SSO available on the Team plan, and if not, which plan has it?", "answer": "No, only Business", "key": "business", "doc_id": "sso"}
+{"question": "Where is a US customer's data stored?", "answer": "AWS us-east-1", "key": "us-east-1", "doc_id": "data"}
+{"question": "Can keyboard shortcuts be remapped?", "answer": "No", "key": "cannot", "doc_id": "shortcuts"}
