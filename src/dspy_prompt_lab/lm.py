@@ -70,8 +70,9 @@ def get_lm(model: str | None = None, **kwargs) -> dspy.LM:
     if spec["key_env"]:
         key = os.getenv(spec["key_env"], "").strip()
         if provider == "anthropic":
-            # claude-haiku-5-5 rejects `temperature` with HTTP 400, even 1.0 (checked against the API).
-            # Drop any that DSPy or an example sets, so runs use the model's own default.
+            # With the `ant` CLI login, four models (haiku 5.5 and 4.5, sonnet 4.6, opus 4.5) rejected
+            # `temperature` with HTTP 400. Not tested with an API key. Drop any that DSPy or an example
+            # sets, so runs use the model's own default.
             litellm.drop_params = True
         if not key and provider == "anthropic":
             key = _ant_profile_token() or ""  # keyless: the logged-in `ant` CLI profile
