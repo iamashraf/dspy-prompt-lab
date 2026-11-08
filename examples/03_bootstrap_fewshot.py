@@ -27,6 +27,7 @@ from dspy_prompt_lab.lm import configure_lm
 from dspy_prompt_lab.metrics import label_match
 from dspy_prompt_lab.programs import make_triage
 from dspy_prompt_lab.report import print_result
+from dspy_prompt_lab.versions import save_version
 
 
 def main():
@@ -50,6 +51,7 @@ def main():
         )
         compiled = optimizer.compile(make_triage(), trainset=train)  # returns a new program
         results[name] = (compiled, evaluate(compiled).score)
+        save_version(compiled, "03_" + name.split()[0], results[name][1], "test", lm)
         print(f"{name:>26}: {len(compiled.predictors()[0].demos):>2} demos -> {results[name][1]:.1f}%")
 
     compiled, after = results["labeled demos only"]

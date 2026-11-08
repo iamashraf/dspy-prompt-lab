@@ -196,4 +196,4 @@ The script trains on 6, 18 and 36 tickets and prints the score on the training s
 - Free beats expensive. `LabeledFewShot` (step 3) used no compile calls and landed within 3 points of the best.
 - Read the instruction and the failures, not only the score. See [debugging](debugging.md). For how far to trust the numbers, see [results](results.md).
 
-Next, see [optimizers](optimizers.md) for when to pick each one.
+Next, see [optimizers](optimizers.md) for when to pick each one. To keep and compare the prompts you produce, see [versioning](versioning.md).

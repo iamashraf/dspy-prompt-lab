@@ -67,6 +67,7 @@ From a local `qwen3-coder:30b`, on 36 test tickets that start at 69.4%. Labeled 
 - [Optimizers](docs/optimizers.md): what each one changes and when to pick it
 - [Results](docs/results.md): numbers from the reference run and how far to trust them
 - [Debugging](docs/debugging.md): logs, traces, and fixes for common problems
+- [Versioning](docs/versioning.md): save optimized prompts and compare two versions
 - [Further reading](docs/further-reading.md): DSPy docs and papers
 
 ## Layout
