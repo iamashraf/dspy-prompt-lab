@@ -5,7 +5,7 @@
 
 Learn DSPy prompt optimization by running it. The repo has sixteen small examples, one per optimizer or idea. Each one scores a program before and after optimization, so you see what an optimizer changed and what it cost.
 
-The examples share one hand-written dataset, run on a local Ollama model or on Anthropic, and write a log and a trace of every model call. The tests run offline. Tested with DSPy 3.4.1.
+The examples share one hand-written dataset, run on a local Ollama model or on Anthropic, and write a log and a trace of every model call. The tests run offline. It also shows how to save optimized prompts and compare two versions. Tested with DSPy 3.4.1.
 
 ## Quick start
 
@@ -56,7 +56,17 @@ The examples route support tickets for a made-up product, Tasklane, to one of si
 
 ## What the reference run found
 
-From a local `qwen3-coder:30b`, on 36 test tickets that start at 69.4%. Labeled demos did best, at 86.1%. The instruction optimizers wrote general per-label rules and never found the precedence rule. One ticket is 2.8 points, so gaps under about 8 points are noise. The full table and the limits are in [results](docs/results.md).
+From a local `qwen3-coder:30b`, on 36 test tickets that start at 69.4%. Labeled demos did best, at 86.1%. The instruction optimizers wrote general per-label rules and never found the precedence rule. One ticket is 2.8 points, so gaps under about 8 points are noise. Examples 03, 09 and 11 also ran on Anthropic `claude-haiku-5-5`. The full table, the local versus Anthropic comparison and the limits are in [results](docs/results.md).
+
+## Version your prompts
+
+Example 03 saves each compiled program to `artifacts/prompts/` as JSON, with an index row for the model, split, score, data hash and git commit. Compare two saved versions on the same tickets:
+
+```bash
+uv run python scripts/compare_prompts.py artifacts/prompts/A.json artifacts/prompts/B.json
+```
+
+The script prints the instruction diff and the tickets that flipped. Two runs of the same comparison disagreed on the local model, so repeat it before you trust a gap. Details are in [versioning](docs/versioning.md).
 
 ## Documentation
 
@@ -73,8 +83,9 @@ From a local `qwen3-coder:30b`, on 36 test tickets that start at 69.4%. Labeled 
 ## Layout
 
 ```text
-src/dspy_prompt_lab/   provider config (lm.py), data, metrics, programs, run logs (debug.py)
+src/dspy_prompt_lab/   provider config (lm.py), data, metrics, programs, run logs (debug.py), prompt versions (versions.py)
 examples/              the sixteen examples
+scripts/               compare_prompts.py, ensure_ollama.sh
 data/                  tickets, help docs, questions
 tests/                 offline tests
 docs/                  the pages above, plus the original plan
