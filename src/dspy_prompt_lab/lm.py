@@ -24,7 +24,6 @@ class LMConfigError(RuntimeError):
 # prefix is the LiteLLM provider prefix; key_env is None when no key is needed.
 PROVIDERS = {
     "ollama": {"prefix": "ollama_chat", "key_env": None, "default_model": "llama3.1:8b"},
-    "openai": {"prefix": "openai", "key_env": "OPENAI_API_KEY", "default_model": "gpt-4o-mini"},
     "anthropic": {
         "prefix": "anthropic",
         "key_env": "ANTHROPIC_API_KEY",
@@ -110,37 +109,23 @@ def _check_ollama(api_base: str, model: str) -> None:
     except (urllib.error.URLError, OSError) as exc:
         raise LMConfigError(
             f"Cannot reach Ollama at {api_base} ({exc}). Start it with `make ollama`, "
-            "or set DSPY_LAB_PROVIDER=openai|anthropic in .env."
+            "or set DSPY_LAB_PROVIDER=anthropic in .env."
         ) from exc
-    if f'"{model}"' not in tags:
+    names = {m["name"] for m in json.loads(tags).get("models", [])}
+    if model not in names and f"{model}:latest" not in names:
         raise LMConfigError(f"Ollama has no model {model!r}. Run `ollama pull {model}`.")
 
 
-EMBEDDERS = {
-    "ollama": "ollama/nomic-embed-text",
-    "openai": "openai/text-embedding-3-small",
-}
-
-
 def get_embedder() -> dspy.Embedder:
-    """Return an embedder for the same provider. Anthropic has no embeddings API.
+    """Return a local Ollama embedder (`nomic-embed-text`), whichever provider answers the chat.
 
-    With DSPY_LAB_PROVIDER=anthropic, set DSPY_LAB_EMBED_PROVIDER=ollama (or openai).
+    Anthropic has no embeddings API, so example 11 always needs a local Ollama for this.
     """
     load_dotenv(find_dotenv(usecwd=True))
-    provider = os.getenv("DSPY_LAB_EMBED_PROVIDER") or os.getenv("DSPY_LAB_PROVIDER", "ollama")
-    if provider not in EMBEDDERS:
-        raise LMConfigError(
-            f"No embeddings for provider {provider!r}. Set DSPY_LAB_EMBED_PROVIDER to one of: "
-            f"{', '.join(EMBEDDERS)}."
-        )
-    model = os.getenv("DSPY_LAB_EMBED_MODEL", "").strip() or EMBEDDERS[provider]
-    if provider == "openai":
-        key = os.getenv("OPENAI_API_KEY", "").strip()
-        if not key:
-            raise LMConfigError("Embeddings with openai need OPENAI_API_KEY in .env.")
-        return dspy.Embedder(model, api_key=key)
-    return dspy.Embedder(model, api_base=os.getenv("OLLAMA_API_BASE", "http://localhost:11434"))
+    model = os.getenv("DSPY_LAB_EMBED_MODEL", "").strip() or "nomic-embed-text"
+    api_base = os.getenv("OLLAMA_API_BASE", "http://localhost:11434")
+    _check_ollama(api_base, model)
+    return dspy.Embedder(f"ollama/{model}", api_base=api_base)
 
 
 def token_usage(lm: dspy.LM | None = None) -> tuple[int, int]:

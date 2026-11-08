@@ -5,8 +5,8 @@ at call time, retrieves the k most similar ones to the *current* input and uses 
 Good when the right example depends on the input, as with house rules that apply to some tickets
 and not others.
 
-Needs an embedding model: nomic-embed-text on Ollama (`ollama pull nomic-embed-text`), or
-text-embedding-3-small on OpenAI. Anthropic has no embeddings: set DSPY_LAB_EMBED_PROVIDER.
+Needs local Ollama with nomic-embed-text (`ollama pull nomic-embed-text`) for the embeddings,
+even when the chat model is Anthropic, which has no embeddings API.
 
 Run:  uv run python examples/11_knn_fewshot.py
 Cost: 26,119 prompt + 970 completion tokens, 2 min on a local 30B model (Ollama).

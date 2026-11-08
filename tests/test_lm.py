@@ -12,7 +12,7 @@ def no_ant_profile(monkeypatch):
 @pytest.fixture(autouse=True)
 def clean_env(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)  # no stray .env is picked up
-    for var in ("DSPY_LAB_PROVIDER", "DSPY_LAB_MODEL", "OPENAI_API_KEY", "ANTHROPIC_API_KEY"):
+    for var in ("DSPY_LAB_PROVIDER", "DSPY_LAB_MODEL", "ANTHROPIC_API_KEY"):
         monkeypatch.delenv(var, raising=False)
 
 
@@ -20,13 +20,6 @@ def test_default_is_ollama_through_litellm():
     lm = get_lm()
     assert lm.model == "ollama_chat/llama3.1:8b"
     assert lm.engine == "litellm"
-
-
-@pytest.mark.parametrize("provider", ["openai", "anthropic"])
-def test_missing_key_fails_with_clear_message(monkeypatch, provider):
-    monkeypatch.setenv("DSPY_LAB_PROVIDER", provider)
-    with pytest.raises(LMConfigError, match="_API_KEY"):
-        get_lm()
 
 
 def test_key_is_read_from_env_and_model_override(monkeypatch):
@@ -37,8 +30,9 @@ def test_key_is_read_from_env_and_model_override(monkeypatch):
     assert get_lm(model="other").model == "anthropic/other"
 
 
-def test_unknown_provider(monkeypatch):
-    monkeypatch.setenv("DSPY_LAB_PROVIDER", "nope")
+@pytest.mark.parametrize("provider", ["nope", "openai"])
+def test_unknown_provider(monkeypatch, provider):
+    monkeypatch.setenv("DSPY_LAB_PROVIDER", provider)
     with pytest.raises(LMConfigError, match="not supported"):
         get_lm()
 
@@ -99,6 +93,13 @@ def test_anthropic_sends_no_temperature_because_the_api_rejects_it(monkeypatch):
     monkeypatch.setenv("DSPY_LAB_PROVIDER", "anthropic")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
     assert get_lm().kwargs["temperature"] is None  # None means DSPy does not send it
-    monkeypatch.setenv("DSPY_LAB_PROVIDER", "openai")
-    monkeypatch.setenv("OPENAI_API_KEY", "sk-test")
+    monkeypatch.setenv("DSPY_LAB_PROVIDER", "ollama")
     assert get_lm().kwargs["temperature"] == 0.0
+
+
+def test_embedder_is_always_local_ollama_even_with_anthropic(monkeypatch):
+    from dspy_prompt_lab import lm as lm_module
+
+    monkeypatch.setenv("DSPY_LAB_PROVIDER", "anthropic")
+    monkeypatch.setattr(lm_module, "_check_ollama", lambda base, model: None)
+    assert lm_module.get_embedder().model == "ollama/nomic-embed-text"

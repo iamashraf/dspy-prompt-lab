@@ -35,7 +35,7 @@ def main():
     if lm.model.startswith("ollama"):
         # COPRO asks for `breadth` completions in one call (the `n` parameter). Ollama only returns
         # one, so LiteLLM raises unless told to drop it, and each round then tries a single candidate.
-        # Use OpenAI or Anthropic to get the full breadth.
+        # A provider that returns several completions per call gives the full breadth.
         litellm.drop_params = True
         print("Ollama: one completion per call, so COPRO tries 1 new instruction per round.")
 

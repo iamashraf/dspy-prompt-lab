@@ -102,7 +102,7 @@ These optimizers rewrite the instruction text. They cost more and show you what 
 
 - On Ollama the script prints that it tries one new instruction per round.
 - Reference run. The best training score was 75.0%, but the test score was 66.7%, below the 69.4% baseline. The new instruction was a long, generic "expert routing specialist" prompt.
-- On OpenAI or Anthropic you get the full `breadth`. This repo did not run it there.
+- A provider that returns several completions per call gives the full `breadth`. Ollama does not. Anthropic was not tested.
 
 ### Step 11. Induce rules (`15_infer_rules.py`)
 

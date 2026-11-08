@@ -38,7 +38,7 @@ Scores are the test score on 36 tickets with a local model, from a baseline of 6
 
 **Ensemble.** Runs every member and votes with `dspy.majority`. It costs one call per member per input.
 
-**COPRO.** Proposes `breadth` instructions per round for `depth` rounds. It needs several completions per call, which Ollama does not support, so on Ollama it tries one candidate per round. This repo has not run it on a hosted model.
+**COPRO.** Proposes `breadth` instructions per round for `depth` rounds. It needs several completions per call, which Ollama does not support, so on Ollama it tries one candidate per round. Anthropic was not tested, and `lm.py` drops unsupported parameters there, so expect the same.
 
 **InferRules.** Bootstraps demos, asks a model for rules, and keeps the best rule set on the dev set. The rules appear in the instruction, so you can read them.
 

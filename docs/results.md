@@ -36,6 +36,29 @@ Every row starts from the same baseline of 69.4% test, except 06 and 07, which u
 
 Example 08 also prints train and dev scores for 6, 18 and 36 training tickets. See the [walkthrough](walkthrough.md#step-16-catch-overfitting-08_overfitting_and_splitspy).
 
+## Local model and Anthropic, on one example
+
+Example 03 ran on both. The Anthropic run used `claude-haiku-5-5` through the `ant` CLI login, with the cache off, once.
+
+| | Local `qwen3-coder:30b` | Anthropic `claude-haiku-5-5` |
+|---|---|---|
+| Baseline test score | 69.4% | 72.2% |
+| Bootstrapped demos only | 80.6% | 72.2% |
+| Labeled demos | 86.1% | 77.8% |
+| Model calls | 118 | 118 |
+| Prompt tokens | 62,063 | 94,651 |
+| Completion tokens | 1,566 | 6,750 |
+| Time | 175 s | 42 s |
+| Temperature | 0, results repeat | not accepted by the API, sampling is on |
+
+What differs:
+
+- Anthropic starts higher and gains less. Labeled demos added 5.6 points there against 16.7 locally. The Anthropic gain is two tickets, which is inside the noise.
+- The direction is the same on both. Labeled demos beat bootstrapped demos, and bootstrapped demos added nothing on Anthropic.
+- Anthropic used 1.5 times the prompt tokens and 4.3 times the completion tokens. Some of the extra completion tokens are thinking tokens that are billed but not shown. See [getting started](getting-started.md#anthropic-without-a-key).
+- Anthropic finished four times faster.
+- Anthropic runs can differ from run to run. The same baseline scored 75.0% in example 02 and 72.2% in example 03.
+
 ## Why your numbers will differ
 
 - Different model. A smaller model starts lower, and the gaps between optimizers change.
@@ -54,7 +77,7 @@ Example 08 also prints train and dev scores for 6, 18 and 36 training tickets. S
 ## What it does not support
 
 - It does not rank the optimizers. The gaps between 77.8% and 86.1% are within a couple of standard errors.
-- It does not say how these optimizers do on a hosted model, a larger task, or a different metric.
+- It does not say how these optimizers do on a larger task or a different metric. Only example 03 was also run on Anthropic, see below.
 - It does not test `COPRO` as designed. Ollama returns one completion per call, so it tried one candidate per round.
 
 ## Other limits

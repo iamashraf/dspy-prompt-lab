@@ -5,7 +5,7 @@
 
 Learn DSPy prompt optimization by running it. The repo has sixteen small examples, one per optimizer or idea. Each one scores a program before and after optimization, so you see what an optimizer changed and what it cost.
 
-The examples share one hand-written dataset, work with Ollama, OpenAI or Anthropic, and write logs you can read. The tests run offline. Tested with DSPy 3.4.1.
+The examples share one hand-written dataset, run on a local Ollama model or on Anthropic, and write a log and a trace of every model call. The tests run offline. Tested with DSPy 3.4.1.
 
 ## Quick start
 
@@ -15,7 +15,7 @@ You need Python 3.12+ and [uv](https://docs.astral.sh/uv/). The default model ru
 git clone https://github.com/iamashraf/dspy-prompt-lab.git
 cd dspy-prompt-lab
 uv sync
-cp .env.example .env         # choose ollama (default), openai or anthropic
+cp .env.example .env         # choose ollama (default) or anthropic
 make test                    # offline tests, no model or network
 make ollama                  # starts Ollama with podman if none is running
 uv run python examples/02_evaluate_baseline.py

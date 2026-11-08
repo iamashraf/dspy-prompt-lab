@@ -5,7 +5,7 @@ This page gets one example running, then explains the setup choices. It takes ab
 ## Prerequisites
 
 - Python 3.12 or newer and [uv](https://docs.astral.sh/uv/).
-- One language model, either a local one through [Ollama](https://ollama.com) or an OpenAI or Anthropic API key.
+- One language model, either a local one through [Ollama](https://ollama.com) or Anthropic.
 - About 20 GB of free disk if you run a local 30B model, or about 5 GB for `llama3.1:8b`.
 
 ## Install
@@ -30,8 +30,7 @@ cp .env.example .env
 | Provider | Set in `.env` | Notes |
 |---|---|---|
 | Ollama (default) | `DSPY_LAB_PROVIDER=ollama` | Free. Runs on your machine. No key. |
-| OpenAI | `DSPY_LAB_PROVIDER=openai` and `OPENAI_API_KEY=...` | Default model `gpt-4o-mini`. |
-| Anthropic | `DSPY_LAB_PROVIDER=anthropic`, then `ANTHROPIC_API_KEY=...` or `ant auth login` | Default model `claude-haiku-5-5`. No key needed with the CLI login. No embeddings, see below. |
+| Anthropic | `DSPY_LAB_PROVIDER=anthropic`, then `ANTHROPIC_API_KEY=...` or `ant auth login` | Default model `claude-haiku-5-5`. No key needed with the CLI login. Example 11 still needs local Ollama, see below. |
 
 Set `DSPY_LAB_MODEL` to use a different model from the same provider. `.env` is git-ignored. The repo never stores a key, and a missing key stops the run with a message that names the variable.
 
@@ -47,7 +46,7 @@ With `DSPY_LAB_PROVIDER=anthropic` and no `ANTHROPIC_API_KEY`, `lm.py` runs `ant
 
 With the `ant` CLI login, the API rejects the `temperature` parameter, even 1.0, with HTTP 400 "Extra inputs are not permitted". Four models were tried (`claude-haiku-5-5`, `claude-haiku-4-5-20251001`, `claude-sonnet-4-6`, `claude-opus-4-5-20251101`) and all rejected it. This was not tested with an API key, so it may be a property of the login and not of the models. On Anthropic, `lm.py` sends no temperature and drops any that DSPy or an example sets. Sampling is still on: the same prompt gave 3 different answers in 8 calls to `claude-haiku-5-5`. The default is reported to be 1.0, which this repo did not verify. Repeat runs can therefore differ, and one ticket is 2.8 points.
 
-`claude-haiku-5-5` also thinks on some requests. For a short label task the API returned a `thinking` block with no visible text and billed about 50 output tokens for a one-word answer. In example 02, 26 of 72 calls were billed far more than their visible reply, and those calls held 72% of the 4,692 completion tokens. The completion counts in this repo's result lines come from the API's usage field, so they include thinking tokens, as billed. Runs use the model's own default, so they are not pinned to temperature 0 as they are on Ollama and OpenAI.
+`claude-haiku-5-5` also thinks on some requests. For a short label task the API returned a `thinking` block with no visible text and billed about 50 output tokens for a one-word answer. In example 02, 26 of 72 calls were billed far more than their visible reply, and those calls held 72% of the 4,692 completion tokens. The completion counts in this repo's result lines come from the API's usage field, so they include thinking tokens, as billed. Runs use the model's own default, so they are not pinned to temperature 0 as they are on Ollama.
 
 ### Ollama with podman
 
@@ -61,7 +60,7 @@ make ollama      # starts Ollama with podman (or docker) only if none is listeni
 
 ### Embeddings
 
-Only example 11 needs embeddings. Ollama uses `nomic-embed-text` (`ollama pull nomic-embed-text`). OpenAI uses `text-embedding-3-small`. Anthropic has no embeddings API, so set `DSPY_LAB_EMBED_PROVIDER=ollama` or `openai` as well.
+Only example 11 needs embeddings. It always uses local Ollama with `nomic-embed-text` (`ollama pull nomic-embed-text`), because Anthropic has no embeddings API. With `DSPY_LAB_PROVIDER=anthropic`, keep Ollama running for that one example. Change the model with `DSPY_LAB_EMBED_MODEL`.
 
 ## Run an example
 
@@ -94,7 +93,7 @@ See [debugging](debugging.md) for how to use them.
 
 Each example's docstring lists its measured tokens. The measured numbers in [results](results.md) come from a local model, so they cost nothing but time.
 
-To estimate a hosted-model bill, multiply the prompt and completion tokens by your provider's current per-token prices. The cheap examples (02, 06, 09, 11) use under 40,000 prompt tokens. The search-based ones (04, 08, 10, 13, 15) use 130,000 to 250,000.
+To estimate an Anthropic bill, multiply the prompt and completion tokens by your provider's current per-token prices. The cheap examples (02, 06, 09, 11) use under 40,000 prompt tokens. The search-based ones (04, 08, 10, 13, 15) use 130,000 to 250,000.
 
 DSPy caches model replies on disk, so a repeat run of the same example is free and fast. Set `DSPY_LAB_CACHE=0` when you want to measure real cost or time.
 
@@ -113,8 +112,8 @@ The image runs example 02. The container reaches Ollama on your host through `OL
 |---|---|
 | `Cannot reach Ollama at ...` | Run `make ollama`, or check `OLLAMA_API_BASE`. |
 | `Ollama has no model '...'` | Run `ollama pull <model>`. |
-| `DSPY_LAB_PROVIDER=openai needs OPENAI_API_KEY` | Set the key in `.env`. |
-| A run takes very long | A 30B model on CPU is slow. Use a smaller model or a hosted one. |
+| `DSPY_LAB_PROVIDER=anthropic needs ANTHROPIC_API_KEY or ... ant auth login` | Run `ant auth login`, or set the key in `.env`. |
+| A run takes very long | A 30B model on CPU is slow. Use a smaller model, or Anthropic. |
 | Scores differ from the docs | Expected. See [results](results.md#why-your-numbers-will-differ). |
 
 More in [debugging](debugging.md).

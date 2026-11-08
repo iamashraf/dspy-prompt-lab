@@ -2,7 +2,8 @@
 
 # Build: podman build -t dspy-prompt-lab -f Containerfile .
 # Runs the examples in a container. The container reaches a host Ollama through
-# OLLAMA_API_BASE, or an OpenAI/Anthropic key passed with --env-file .env.
+# OLLAMA_API_BASE, or an Anthropic key passed with --env-file .env. The `ant` CLI login does not
+# exist inside the container, so Anthropic there needs ANTHROPIC_API_KEY.
 FROM python:3.12-slim-bookworm
 
 RUN useradd --create-home --uid 1000 appuser \
