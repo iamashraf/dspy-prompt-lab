@@ -95,7 +95,7 @@ def test_ant_profile_token_parses_cli_json_and_survives_a_missing_cli(monkeypatc
     assert lm_module._ant_profile_token() is None
 
 
-def test_anthropic_sends_no_temperature_because_claude_5_rejects_it(monkeypatch):
+def test_anthropic_sends_no_temperature_because_the_api_rejects_it(monkeypatch):
     monkeypatch.setenv("DSPY_LAB_PROVIDER", "anthropic")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
     assert get_lm().kwargs["temperature"] is None  # None means DSPy does not send it

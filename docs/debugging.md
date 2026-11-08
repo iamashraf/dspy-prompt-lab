@@ -48,7 +48,7 @@ A score says how much is wrong. The failed rows say what to change. In example 0
 | A run finishes in seconds with 0 tokens | Every reply came from the cache | Set `DSPY_LAB_CACHE=0` |
 | SIMBA changes nothing | The model gives the same answer on every sample | Look for `max-to-min gap 0.0` in the log |
 | COPRO does not change the instruction on Ollama | Ollama returns one completion per call, so there is one candidate | Use a hosted model |
-| `does not support temperature=0.0` | A Claude 5 model rejects sampling parameters | `lm.py` already drops them on the Anthropic provider. Update to the current code |
+| `does not support temperature=0.0` | `claude-haiku-5-5` rejects `temperature` | `lm.py` already drops them on the Anthropic provider. Update to the current code |
 | `UnsupportedParamsError ... 'n'` | The provider does not support several completions | Same as above. Example 12 sets `litellm.drop_params` |
 | `HTTP 404` from Ollama | DSPy 3.4's native engine cannot reach Ollama this way | `lm.py` already uses `engine="litellm"` |
 | `partially initialized module 'litellm'` | A race when several threads import it | `lm.py` imports it first. Update to the current code |

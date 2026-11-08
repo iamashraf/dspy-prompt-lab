@@ -45,7 +45,7 @@ ant auth login        # opens a browser
 
 With `DSPY_LAB_PROVIDER=anthropic` and no `ANTHROPIC_API_KEY`, `lm.py` runs `ant auth print-credentials` and uses the OAuth token of your active profile. The token lasts hours, and the CLI refreshes it when each run starts. An `ANTHROPIC_API_KEY` in the environment takes precedence. The repo never writes the token to a file or a log.
 
-Claude 5 models accept no sampling parameters, so the API rejects `temperature`. On Anthropic, `lm.py` sends none and drops any that DSPy or an example sets. Runs use the model's own default, so they are not pinned to temperature 0 as they are on Ollama and OpenAI.
+`claude-haiku-5-5` rejects the `temperature` parameter, even 1.0: the API returns HTTP 400 "Extra inputs are not permitted". On Anthropic, `lm.py` sends none and drops any that DSPy or an example sets. This was checked for `temperature` only, on that model. Runs use the model's own default, so they are not pinned to temperature 0 as they are on Ollama and OpenAI.
 
 ### Ollama with podman
 
