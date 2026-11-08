@@ -75,7 +75,18 @@ The audit log vanished after we downgraded. Is that a bug?
 
 **What to notice.** That demo is labeled `billing`, not `bug`. The model can only learn that from a labeled demo.
 
-## Step 4. Read the result
+## Step 4. Save each version
+
+The loop also saves each compiled program, so you can diff and compare them later.
+
+```python
+results[name] = (compiled, evaluate(compiled).score)
+save_version(compiled, "03_" + name.split()[0], results[name][1], "test", lm)
+```
+
+**What to notice.** Each call writes a JSON file and an index row under `artifacts/prompts/`. [Versioning](../versioning.md) shows how to compare the two files.
+
+## Step 5. Read the result
 
 ```python
 print_result("03_bootstrap_fewshot", baseline, after, lm, started)

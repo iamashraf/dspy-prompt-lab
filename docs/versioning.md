@@ -27,33 +27,43 @@ uv run python scripts/compare_prompts.py \
   artifacts/prompts/03_labeled/20261108-085029.json
 ```
 
-The script prints the instruction diff and the demo overlap. It then scores both versions on the 36 dev tickets and lists every ticket where they disagree.
+The script prints the instruction diff and the demo overlap. It then scores both versions on the 36 dev tickets and lists every ticket where they disagree. Add `test` as a third argument to score on test instead.
+
+The score in `index.jsonl` is the test score from the example run, so it differs from the dev score here. The two splits answer different questions. Dev picks a version, and test reports it once.
 
 ```text
 Instructions: identical
 Demos: A has 6, B has 16, 2 shared
 
-Dev score: A 66.7%  B 66.7%
-  A right, B wrong: [account] A new teammate says their invitation link has expired.
-  A wrong, B right: [feature] How do I add a custom field for budget on my cards?
+Dev score: A 77.8%  B 83.3%
+  A wrong, B right: [account] How do I leave a workspace I was invited to?
+  A right, B wrong: [account] Invites to my teammates bounce back with an error.
 ```
 
 ## Why the flip list matters
 
-Both versions score 66.7% on dev, so a score-only check reports no change. The two versions disagree on 8 of 36 tickets, 4 in each direction.
+The flip list shows which tickets changed, and the score gap alone cannot. It also shows how little one run proves.
 
-A new prompt can keep the score and still change what users see. It can also fix one ticket type and break another. The flip list shows that, and the score does not.
+The same two versions were compared twice on the same 36 dev tickets, on the same local model with the cache off for the second run. The runs disagreed.
 
-One ticket is 2.8 points on 36 tickets. Treat a gap of one or two tickets as noise, and read the flips to see whether the change is real.
+| Run | A | B | Tickets that flipped |
+|---|---|---|---|
+| 1 | 66.7% | 66.7% | 8 (4 each way) |
+| 2 | 77.8% | 83.3% | 4 (3 for B, 1 for A) |
+
+Only one flipped ticket, "Invites to my teammates bounce back with an error", appears in both runs. The local model does not give the same answers on every run, even with the same prompt. One ticket is 2.8 points, so a gap of one or two tickets is noise.
+
+This is the reason to keep versions. A single comparison cannot say which prompt is better. Saved files let you rerun the same two prompts as often as you need.
 
 ## Rules that keep the comparison fair
 
-- Select a version on dev. Report test once, at the end.
+- Select a version on dev. Report test once, at the end (the index score is test, the compare default is dev).
 - Compare only versions with the same model and data hash.
 - Set `DSPY_LAB_CACHE=0` when you measure cost or time, because cached calls cost nothing.
 
 ## Limits
 
-- The 8 flips come from one run on `qwen3-coder:30b`. The run was not repeated.
+- The script scores each version once. Run it at least three times with `DSPY_LAB_CACHE=0` and trust only the flips that repeat. The cache returns the same answers, so a cached rerun proves nothing.
+- The two runs above used `qwen3-coder:30b`. The cause of the run-to-run difference was not isolated.
 - The saved files stay local. To track prompts in git, copy the ones you want to keep into a committed folder.
 - Only example 03 saves versions. Add `save_version` after any `compile` call to save the others.

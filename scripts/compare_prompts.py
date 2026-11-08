@@ -1,9 +1,10 @@
 """Compare two saved prompt versions on the dev split.
 
-Run:  uv run python scripts/compare_prompts.py artifacts/prompts/A.json artifacts/prompts/B.json
+Run:  uv run python scripts/compare_prompts.py artifacts/prompts/A.json artifacts/prompts/B.json [dev|test]
 
-Prints the instruction diff, the demos that changed, then scores both versions on the same dev
-tickets and lists the tickets that flipped. One ticket is 2.8 points on 36, so read the flips,
+Prints the instruction diff, the demos that changed, then scores both versions on the same tickets
+(dev by default, because you pick a version on dev) and lists the tickets that flipped. The score
+in index.jsonl is the test score, so pass `test` to reproduce it. One ticket is 2.8 points on 36, so read the flips,
 not only the score gap.
 """
 
@@ -24,7 +25,7 @@ def load(path: str) -> dspy.Module:
     return program
 
 
-def main(path_a: str, path_b: str):
+def main(path_a: str, path_b: str, split: str = "dev"):
     configure_lm()
     a, b = load(path_a), load(path_b)
     pa, pb = a.predictors()[0], b.predictors()[0]
@@ -37,16 +38,17 @@ def main(path_a: str, path_b: str):
     tickets_b = {d["ticket"] for d in pb.demos}
     print(f"Demos: A has {len(tickets_a)}, B has {len(tickets_b)}, {len(tickets_a & tickets_b)} shared")
 
-    _, dev, _ = load_tickets()
-    evaluate = dspy.Evaluate(devset=dev, metric=label_match, num_threads=4)
+    _, dev, test = load_tickets()
+    tickets = {"dev": dev, "test": test}[split]
+    evaluate = dspy.Evaluate(devset=tickets, metric=label_match, num_threads=4)
     ra, rb = evaluate(a), evaluate(b)
-    print(f"\nDev score: A {ra.score:.1f}%  B {rb.score:.1f}%")
+    print(f"\n{split.capitalize()} score: A {ra.score:.1f}%  B {rb.score:.1f}%")
     for (ex, _, sa), (_, _, sb) in zip(ra.results, rb.results, strict=True):
         if bool(sa) != bool(sb):
             print(f"  {'A wrong, B right' if sb else 'A right, B wrong'}: [{ex.label}] {ex.ticket[:70]}")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) not in (3, 4) or sys.argv[3:] not in ([], ["dev"], ["test"]):
         sys.exit(__doc__)
-    main(sys.argv[1], sys.argv[2])
+    main(*sys.argv[1:])
