@@ -5,7 +5,8 @@ trainset, then repeats for `depth` rounds starting from the best. It changes the
 only, never the demos. MIPROv2 (example 04) is its more capable successor; COPRO is simpler to read.
 
 Run:  uv run python examples/12_copro.py
-Cost: about breadth x depth x len(trainset) = 4 x 2 x 36 calls. Free on Ollama.
+Cost: 50,261 prompt + 2,613 completion tokens, 4 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: pass `track_stats=True` to COPRO to keep every candidate instruction and score on
        `compiled.results_best` and `compiled.results_latest` (min/max/avg score per depth). Scores that
        never move mean the metric is flat or, on Ollama, that only 1 candidate was tried.

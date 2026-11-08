@@ -9,7 +9,8 @@ and prints three numbers per run:
   test   - score on examples nobody touched; look at it once, at the end
 
 Run:  uv run python examples/08_overfitting_and_splits.py
-Cost: 3 optimizer runs + 9 evaluations. Free on Ollama, about $0.10 on gpt-4o-mini.
+Cost: 245,524 prompt + 3,173 completion tokens, 8 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: if train is high and dev is low, you are fitting the examples, not the task. Add data or
        reduce demos before trying a stronger optimizer.
 Docs: https://dspy.ai/learn/evaluation/data/  (train/dev/test guidance)

@@ -10,7 +10,8 @@ teaches what the model already knew. The hidden labeling rules live in the ticke
 *wrong*, and those only reach the prompt as labeled demos.
 
 Run:  uv run python examples/03_bootstrap_fewshot.py
-Cost: about 36 training calls per optimizer run, 3 evaluations of 36. Free on Ollama.
+Cost: 62,063 prompt + 1,566 completion tokens, 3 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: if the log says "Bootstrapped 0 full traces", the metric rejected every run: test the metric by
        hand on one gold/prediction pair. Print `predictor.demos` to see what reached the prompt.
 Docs: https://dspy.ai/api/optimizers/BootstrapFewShot/

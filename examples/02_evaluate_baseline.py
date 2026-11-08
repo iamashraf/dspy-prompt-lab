@@ -8,7 +8,8 @@ The labels follow house rules the model cannot guess, such as "CSV export exists
 export does not, so a PDF request is a `feature`, not a `howto`".
 
 Run:  uv run python examples/02_evaluate_baseline.py
-Cost: 72 tickets, one call each. Free on Ollama, about $0.01 on gpt-4o-mini.
+Cost: 16,438 prompt + 953 completion tokens, 2 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: read the failures, not just the score (`show_failures` below). `dspy.Evaluate` also takes
        `provide_traceback=True` and `max_errors=` to surface crashes inside the program, and
        `save_as_json="artifacts/eval.json"` to keep every input, prediction and score for diffing.

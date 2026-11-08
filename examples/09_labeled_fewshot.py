@@ -4,7 +4,8 @@ No LM calls to compile, no metric. It picks k random labeled examples as demos. 
 to beat: if a fancier optimizer cannot beat this, it is not worth its cost.
 
 Run:  uv run python examples/09_labeled_fewshot.py
-Cost: compile is free (no LM calls). One evaluation of 36 tickets.
+Cost: 35,038 prompt + 958 completion tokens, 2 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: `compiled.predictors()[0].demos` lists the copied examples. The draw is seeded (random.Random(0)): same trainset, same demos, every run.
 Docs: https://dspy.ai/api/optimizers/LabeledFewShot/
 """

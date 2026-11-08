@@ -5,7 +5,8 @@ programs (different demos, different order), scores each on a validation set, an
 winner. More calls than 03, usually a more reliable result.
 
 Run:  uv run python examples/10_bootstrap_random_search.py
-Cost: num_candidate_programs x bootstrapping + scoring each on dev. Free on Ollama (a few minutes).
+Cost: 154,741 prompt + 5,549 completion tokens, 10 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: `compiled.candidate_programs` holds every candidate with its score. If all scores are equal,
        the valset is too small or too easy to tell them apart.
 Docs: https://dspy.ai/api/optimizers/BootstrapFewShotWithRandomSearch/

@@ -7,7 +7,8 @@ DSPy replaces a hand-written prompt with two things:
 Nothing is optimized here. This file only shows what you write, and what DSPy sends.
 
 Run:  uv run python examples/01_signatures_and_modules.py
-Cost: about 5 short LM calls. Free on Ollama, well under $0.01 on a hosted model.
+Cost: 1,055 prompt + 219 completion tokens, 16 s on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: `dspy.inspect_history(n=1)` prints the exact prompt and reply of the last call (used below).
        Every run also writes artifacts/logs/<example>-<time>.log and a .trace.jsonl of all LM calls.
        DSPY_LAB_DEBUG=1 raises the log level to DEBUG. Set cache=False in get_lm() if you suspect a stale cached reply.

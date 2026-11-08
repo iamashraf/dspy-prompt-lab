@@ -16,7 +16,8 @@ This script scores the same RAG answers with the cheap metric and the judge, the
 they disagree. Set DSPY_LAB_JUDGE_MODEL to judge with a different model of the same provider.
 
 Run:  uv run python examples/06_custom_metric_with_llm_judge.py
-Cost: 2 x 12 question calls + 12 judge calls. Free on Ollama, about $0.01 on gpt-4o-mini.
+Cost: 10,814 prompt + 2,473 completion tokens, 2 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: validate a judge before trusting it. Read 10 of its verdicts next to the reference (the
        disagreement list below), and rerun to see if verdicts flip: a judge that flips is noise.
 Docs: https://dspy.ai/learn/evaluation/metrics/  https://arxiv.org/abs/2306.05685 (LLM-as-judge)

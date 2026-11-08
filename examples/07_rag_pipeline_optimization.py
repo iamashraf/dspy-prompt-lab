@@ -9,7 +9,8 @@ the limit of this example: if retrieval misses, no prompt fixes it. The script c
 retrieval separately so you can tell the two failure modes apart.
 
 Run:  uv run python examples/07_rag_pipeline_optimization.py
-Cost: about 60 calls. Free on Ollama, under $0.05 on gpt-4o-mini.
+Cost: 53,491 prompt + 4,272 completion tokens, 6 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: check retrieval before blaming the prompt (hit@3 below). To see the context the model got,
        call `dspy.inspect_history(n=1)` after one `program(question=...)`.
 Docs: https://dspy.ai/tutorials/rag/

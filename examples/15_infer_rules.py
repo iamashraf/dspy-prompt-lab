@@ -5,7 +5,8 @@ the rule set that scores best on the validation set. The rules are appended to t
 so you can read what it learned. A good fit for hidden policies like this repo's ticket routing.
 
 Run:  uv run python examples/15_infer_rules.py
-Cost: num_candidates x (rule writing + validation). Free on Ollama.
+Cost: 211,347 prompt + 2,991 completion tokens, 7 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: read the induced rules in the printed instruction. If they are vague, raise `num_rules`
        or give it more bootstrapped demos.
 Docs: https://dspy.ai/api/optimizers/InferRules/

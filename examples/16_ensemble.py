@@ -5,7 +5,8 @@ programs, each built from a different third of the trainset) and it runs them al
 the outputs, by default with `dspy.majority`. It trades 3x the calls for stability: one unlucky demo set matters less.
 
 Run:  uv run python examples/16_ensemble.py
-Cost: 3 LM calls per ticket at inference. Compile is free.
+Cost: 130,841 prompt + 3,342 completion tokens, 6 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: if members score alike, voting adds nothing. Members that disagree are where it helps.
 Docs: https://dspy.ai/api/optimizers/Ensemble/
 """

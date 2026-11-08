@@ -10,8 +10,8 @@ MIPROv2 does three things:
 rules the model has to be *told* (here: the labeling policy), not just shown.
 
 Run:  uv run python examples/04_miprov2.py
-Cost: light mode, a few hundred calls. Free on Ollama (several minutes), roughly $0.10-0.50 on a
-      hosted small model. The script prints the exact token count at the end.
+Cost: 208,359 prompt + 7,283 completion tokens, 14 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: the log shows each trial's score. `track_stats=True` (default) keeps them on `compiled.trial_logs`.
        Pass `verbose=True` to MIPROv2 for the full proposal log, and `log_dir=` to keep it. If the
        instruction did not change, the best candidate was the original: compare scores in the log.
@@ -52,7 +52,6 @@ def main():
         valset=dev,  # candidates are scored here, never on test
         max_bootstrapped_demos=3,
         max_labeled_demos=3,
-        requires_permission_to_run=False,  # skip the interactive cost prompt
     )
 
     # The result: a new instruction and new demos, both inspectable.

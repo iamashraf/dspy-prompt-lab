@@ -6,7 +6,8 @@ and a bad attempt. It repeats for `max_steps`. Needs temperature above 0 to see 
 program samples at 0.7 here.
 
 Run:  uv run python examples/13_simba.py
-Cost: bsize x num_candidates x max_steps calls, a few hundred. Free on Ollama.
+Cost: 131,151 prompt + 6,683 completion tokens, 21 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: SIMBA logs each step's batch scores. If a batch has no variation, nothing is learned: raise
        the temperature, or lower `bsize` so hard examples stand out.
 Docs: https://dspy.ai/api/optimizers/SIMBA/

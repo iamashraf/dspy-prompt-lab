@@ -27,7 +27,8 @@ LMS: list[dspy.LM] = []  # every LM built by get_lm: judge, reflection and optim
 
 def start_run_log(lm: dspy.LM, name: str | None = None) -> Path:
     """Attach a file log for this run and write the LM trace when the process exits."""
-    name = name or Path(sys.argv[0]).stem or "run"
+    script = Path(sys.argv[0]).stem  # "-c" for `python -c`, empty in some REPLs
+    name = name or (script if script.isidentifier() or script[:1].isdigit() else "run")
     log_dir = Path(os.getenv("DSPY_LAB_LOG_DIR", "artifacts/logs"))
     log_dir.mkdir(parents=True, exist_ok=True)
     stem = log_dir / f"{name}-{time.strftime('%Y%m%d-%H%M%S')}"

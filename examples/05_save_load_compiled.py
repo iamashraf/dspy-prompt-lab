@@ -6,7 +6,8 @@ A DSPy program's learned state is small: the instruction and the demos per predi
 writes that state to JSON. To use it, build the same program class and call `load()`.
 
 Run:  uv run python examples/05_save_load_compiled.py
-Cost: one cheap BootstrapFewShot run plus 2 evaluations. Free on Ollama.
+Cost: 48,766 prompt + 1,077 completion tokens, 2 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: open the saved JSON, it is plain text. If a load looks like it did nothing, compare
        `predictor.signature.instructions` and `len(predictor.demos)` before and after. Load into
        the same program class that was saved: names of predictors must match.

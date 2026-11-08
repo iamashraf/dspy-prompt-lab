@@ -53,3 +53,11 @@ def test_token_usage_sums_every_lm_not_just_the_main_one():
         assert token_usage() == (6, 2)
     finally:
         debug.LMS.clear()
+
+
+def test_log_name_falls_back_when_not_run_from_a_script(tmp_path, monkeypatch):
+    monkeypatch.setenv("DSPY_LAB_LOG_DIR", str(tmp_path))
+    monkeypatch.setattr("sys.argv", ["-c"])
+    assert start_run_log(fake_lm()).name.startswith("run-")
+    monkeypatch.setattr("sys.argv", ["examples/04_miprov2.py"])
+    assert start_run_log(fake_lm()).name.startswith("04_miprov2-")

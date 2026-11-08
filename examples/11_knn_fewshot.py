@@ -9,10 +9,11 @@ Needs an embedding model: nomic-embed-text on Ollama (`ollama pull nomic-embed-t
 text-embedding-3-small on OpenAI. Anthropic has no embeddings: set DSPY_LAB_EMBED_PROVIDER.
 
 Run:  uv run python examples/11_knn_fewshot.py
-Cost: embeddings for 36 tickets, then one call per test ticket, because this script asks for labeled
-      neighbours only (max_bootstrapped_demos=0). With DSPy's default (bootstrapped demos) the
-      optimizer re-runs a mini-bootstrap for every query: about k+1 calls per ticket, which took
-      ~11 minutes on a local 30B model for 36 tickets.
+Cost: 26,119 prompt + 970 completion tokens, 2 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
+      This script asks for labeled neighbours only (max_bootstrapped_demos=0), so each ticket is one
+      call. With DSPy's default (bootstrapped demos) the optimizer re-runs a mini-bootstrap for every
+      query, about k+1 calls per ticket: 81,000 prompt tokens and 687 s in an earlier run.
 Debug: `lm.history[-1]["messages"]` shows which demos were retrieved for the last call. Bad
        neighbours usually mean a weak embedding model or too small a trainset.
 Docs: https://dspy.ai/api/optimizers/KNNFewShot/

@@ -7,7 +7,8 @@ from those mistakes. The metric returns `dspy.Prediction(score=..., feedback=...
 Use a stronger model for reflection if you have one: set DSPY_LAB_REFLECTION_MODEL.
 
 Run:  uv run python examples/14_gepa.py
-Cost: capped here by max_metric_calls=300, plus reflection calls. Free on Ollama (several minutes).
+Cost: 163,476 prompt + 7,193 completion tokens, 30 min on a local 30B model (Ollama).
+      Multiply by your provider's token prices for a hosted model.
 Debug: GEPA's value is its feedback text. Print `feedback_metric` output for 3 failures and ask if
        a human could fix the prompt from it. `track_stats=True` returns `detailed_results`;
        `log_dir=` keeps checkpoints so a run can resume.
