@@ -1,7 +1,7 @@
 [project]
 name = "dspy-prompt-lab"
 version = "0.1.0"
-description = "Learn DSPy prompt optimization by running it: nine small examples, a shared dataset, and tests that need no API key."
+description = "Learn DSPy prompt optimization by running it: sixteen small examples, a shared dataset, and tests that need no API key."
 readme = "README.md"
 authors = [
     { name = "Ashraf Mohammed", email = "55521155+iamashraf@users.noreply.github.com" }
