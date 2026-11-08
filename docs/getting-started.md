@@ -31,9 +31,21 @@ cp .env.example .env
 |---|---|---|
 | Ollama (default) | `DSPY_LAB_PROVIDER=ollama` | Free. Runs on your machine. No key. |
 | OpenAI | `DSPY_LAB_PROVIDER=openai` and `OPENAI_API_KEY=...` | Default model `gpt-4o-mini`. |
-| Anthropic | `DSPY_LAB_PROVIDER=anthropic` and `ANTHROPIC_API_KEY=...` | Default model `claude-haiku-5-5`. Has no embeddings, see below. |
+| Anthropic | `DSPY_LAB_PROVIDER=anthropic`, then `ANTHROPIC_API_KEY=...` or `ant auth login` | Default model `claude-haiku-5-5`. No key needed with the CLI login. No embeddings, see below. |
 
 Set `DSPY_LAB_MODEL` to use a different model from the same provider. `.env` is git-ignored. The repo never stores a key, and a missing key stops the run with a message that names the variable.
+
+### Anthropic without a key
+
+If you use the Anthropic CLI (`ant`), log in once and skip the key.
+
+```bash
+ant auth login        # opens a browser
+```
+
+With `DSPY_LAB_PROVIDER=anthropic` and no `ANTHROPIC_API_KEY`, `lm.py` runs `ant auth print-credentials` and uses the OAuth token of your active profile. The token lasts hours, and the CLI refreshes it when each run starts. An `ANTHROPIC_API_KEY` in the environment takes precedence. The repo never writes the token to a file or a log.
+
+Claude 5 models accept no sampling parameters, so the API rejects `temperature`. On Anthropic, `lm.py` sends none and drops any that DSPy or an example sets. Runs use the model's own default, so they are not pinned to temperature 0 as they are on Ollama and OpenAI.
 
 ### Ollama with podman
 

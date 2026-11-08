@@ -4,7 +4,9 @@ Provider and model come from `DSPY_LAB_PROVIDER` and `DSPY_LAB_MODEL`. No key is
 stored in the repo: keys are read from the environment only.
 """
 
+import json
 import os
+import subprocess
 import urllib.error
 import urllib.request
 
@@ -31,6 +33,21 @@ PROVIDERS = {
 }
 
 
+def _ant_profile_token() -> str | None:
+    """Return the OAuth access token of the active `ant` CLI profile, or None.
+
+    `ant auth login` stores a browser-login token. `ant auth print-credentials` refreshes it when it
+    is close to expiry. The token is short-lived (hours), so it is read each time an LM is built.
+    """
+    try:
+        out = subprocess.run(
+            ["ant", "auth", "print-credentials"], capture_output=True, text=True, timeout=20
+        )
+        return json.loads(out.stdout).get("access_token") or None
+    except (OSError, subprocess.SubprocessError, ValueError, AttributeError):
+        return None
+
+
 def get_lm(model: str | None = None, **kwargs) -> dspy.LM:
     """Return an LM for the configured provider. Pass `model` to override the model name.
 
@@ -47,12 +64,21 @@ def get_lm(model: str | None = None, **kwargs) -> dspy.LM:
 
     # DSPY_LAB_CACHE=0 turns off DSPy's response cache: use it to measure real cost and time.
     cache = os.getenv("DSPY_LAB_CACHE", "1") != "0"
-    options = {"temperature": 0.0, "max_tokens": 1024, "cache": cache, **kwargs}
+    options = {"max_tokens": 1024, "cache": cache, **kwargs}
+    if provider != "anthropic":
+        options.setdefault("temperature", 0.0)
     if spec["key_env"]:
         key = os.getenv(spec["key_env"], "").strip()
+        if provider == "anthropic":
+            # Claude 5 models accept no sampling parameters, and the API rejects temperature.
+            # Drop the ones DSPy or an example sets, so runs use the model's own default.
+            litellm.drop_params = True
+        if not key and provider == "anthropic":
+            key = _ant_profile_token() or ""  # keyless: the logged-in `ant` CLI profile
         if not key:
+            hint = " or log in with `ant auth login`" if provider == "anthropic" else ""
             raise LMConfigError(
-                f"DSPY_LAB_PROVIDER={provider} needs {spec['key_env']}. "
+                f"DSPY_LAB_PROVIDER={provider} needs {spec['key_env']}{hint}. "
                 "Copy .env.example to .env and set it, or use DSPY_LAB_PROVIDER=ollama."
             )
         options["api_key"] = key
