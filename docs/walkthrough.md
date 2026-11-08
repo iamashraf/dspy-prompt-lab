@@ -4,7 +4,7 @@ This page runs the sixteen examples in a useful order. Each step says what to ru
 
 All reference numbers come from one local model, `qwen3-coder:30b`, with the cache off. They are the test score on 36 tickets, where one ticket is 2.8 points. Your numbers will differ. [Results](results.md) explains how much.
 
-Setup is in [getting started](getting-started.md). Terms are in [concepts](concepts.md).
+Setup is in [getting started](getting-started.md). Terms are in [concepts](concepts.md). Each step links to a [guide](guides/README.md) that shows the code and the real output one step at a time.
 
 ## The task
 
@@ -16,12 +16,16 @@ The labels follow a house policy that the model cannot guess. When a ticket mixe
 
 ### Step 1. See what DSPy sends (`01_signatures_and_modules.py`)
 
+[Guide for example 01](guides/01-signatures-and-modules.md).
+
 Run it and read the last prompt it prints. You never wrote that prompt. DSPy built it from a signature (`ticket -> label`) and a module (`ChainOfThought`).
 
 - Look for the field names, the allowed labels, and the instruction line "Route a support ticket to the right queue."
 - Try changing `ChainOfThought` to `Predict` in `CleanThenTriage` and compare the prompts.
 
 ### Step 2. Measure a baseline (`02_evaluate_baseline.py`)
+
+[Guide for example 02](guides/02-evaluate-baseline.md).
 
 Run it before anything else. Every later result means nothing without this number.
 
@@ -36,6 +40,8 @@ These optimizers change the examples shown in the prompt and leave the instructi
 
 ### Step 3. Copy examples in (`09_labeled_fewshot.py`)
 
+[Guide for example 09](guides/09-labeled-fewshot.md).
+
 `LabeledFewShot` copies 12 training tickets into the prompt. It makes no model calls to compile. Every other optimizer should beat it.
 
 - Reference run. 83.3% from 69.4%, using 35,000 prompt tokens.
@@ -44,6 +50,8 @@ These optimizers change the examples shown in the prompt and leave the instructi
 
 ### Step 4. Let the model write its own examples (`03_bootstrap_fewshot.py`)
 
+[Guide for example 03](guides/03-bootstrap-fewshot.md).
+
 `BootstrapFewShot` runs the program on training tickets and keeps the runs the metric marks correct. The script compares two settings.
 
 - Reference run. 6 bootstrapped demos gave 80.6%. 16 labeled demos gave 86.1%.
@@ -51,6 +59,8 @@ These optimizers change the examples shown in the prompt and leave the instructi
 - Try `max_bootstrapped_demos=6, max_labeled_demos=6` to mix them.
 
 ### Step 5. Save and reload (`05_save_load_compiled.py`)
+
+[Guide for example 05](guides/05-save-load-compiled.md).
 
 Optimizing costs time and money, so do it once. The script saves a compiled program as JSON, builds a fresh program, loads the file, and scores it.
 
@@ -61,6 +71,8 @@ Optimizing costs time and money, so do it once. The script saves a compiled prog
 
 ### Step 6. Pick examples per ticket (`11_knn_fewshot.py`)
 
+[Guide for example 11](guides/11-knn-fewshot.md).
+
 `KNNFewShot` embeds the training tickets and shows the 6 most similar ones for each new ticket. This needs an embedding model.
 
 - Reference run. 83.3% using 26,000 prompt tokens in 131 seconds.
@@ -69,6 +81,8 @@ Optimizing costs time and money, so do it once. The script saves a compiled prog
 
 ### Step 7. Try many demo sets (`10_bootstrap_random_search.py`)
 
+[Guide for example 10](guides/10-bootstrap-random-search.md).
+
 `BootstrapFewShotWithRandomSearch` builds several candidate programs and keeps the one that scores best on the dev set.
 
 - Reference run. The nine candidates scored 72.2% to 83.3% on dev. The winner scored 77.8% on test.
@@ -76,6 +90,8 @@ Optimizing costs time and money, so do it once. The script saves a compiled prog
 - Try `num_candidate_programs=2` to see how few candidates you need.
 
 ### Step 8. Vote across programs (`16_ensemble.py`)
+
+[Guide for example 16](guides/16-ensemble.md).
 
 `Ensemble` runs several programs and takes a majority vote. The script builds three `LabeledFewShot` programs, each from a different third of the training set.
 
@@ -89,6 +105,8 @@ These optimizers rewrite the instruction text. They cost more and show you what 
 
 ### Step 9. Search for instructions and demos (`04_miprov2.py`)
 
+[Guide for example 04](guides/04-miprov2.md).
+
 `MIPROv2` bootstraps demos, asks a model to propose instructions, and searches the combinations. `auto="light"` keeps the search small.
 
 - Look for the printed instruction and the validation scores of each trial.
@@ -98,6 +116,8 @@ These optimizers rewrite the instruction text. They cost more and show you what 
 
 ### Step 10. Rewrite the instruction (`12_copro.py`)
 
+[Guide for example 12](guides/12-copro.md).
+
 `COPRO` writes new instructions and keeps the best. It asks for several candidates in one call using the `n` parameter, which Ollama does not support.
 
 - On Ollama the script prints that it tries one new instruction per round.
@@ -106,12 +126,16 @@ These optimizers rewrite the instruction text. They cost more and show you what 
 
 ### Step 11. Induce rules (`15_infer_rules.py`)
 
+[Guide for example 15](guides/15-infer-rules.md).
+
 `InferRules` writes natural-language rules from examples and appends them to the instruction.
 
 - Reference run. 80.6%. It wrote five rules, one definition per label, such as "Classify tickets related to payments, invoices, billing cycles, or subscription issues as 'billing'". None covers `security`.
 - Look for whether any rule mentions precedence. None did.
 
 ### Step 12. Learn from feedback text (`14_gepa.py`)
+
+[Guide for example 14](guides/14-gepa.md).
 
 `GEPA` reads text feedback from your metric and rewrites the instruction from the mistakes. The metric here says which label the model chose, which was correct, and shows the ticket.
 
@@ -120,6 +144,8 @@ These optimizers rewrite the instruction text. They cost more and show you what 
 - Try changing the feedback text to include a hint about precedence and see whether the result changes.
 
 ### Step 13. Learn from unstable examples (`13_simba.py`)
+
+[Guide for example 13](guides/13-simba.md).
 
 `SIMBA` samples the program several times per ticket and learns from tickets where the outputs vary.
 
@@ -131,6 +157,8 @@ These optimizers rewrite the instruction text. They cost more and show you what 
 
 ### Step 14. Judge with a model (`06_custom_metric_with_llm_judge.py`)
 
+[Guide for example 06](guides/06-custom-metric-with-llm-judge.md).
+
 Exact match fails on free text. The script scores 18 RAG answers with a containment check and with an LLM judge.
 
 - Reference run. Containment 89%, judge 94%. They disagreed on one answer, where the model said "one of the 10 recovery codes" and the key was the singular "recovery code".
@@ -139,6 +167,8 @@ Exact match fails on free text. The script scores 18 RAG answers with a containm
 
 ### Step 15. Optimize a RAG program (`07_rag_pipeline_optimization.py`)
 
+[Guide for example 07](guides/07-rag-pipeline-optimization.md).
+
 A keyword retriever feeds 3 help-center documents to a `ChainOfThought` answerer. DSPy tunes the answerer only.
 
 - Look at the retrieval line first. Reference run, the right document was in the top 3 for 17 of 18 questions.
@@ -146,6 +176,8 @@ A keyword retriever feeds 3 help-center documents to a `ChainOfThought` answerer
 - Try `k=1` and watch the retrieval line drop.
 
 ### Step 16. Catch overfitting (`08_overfitting_and_splits.py`)
+
+[Guide for example 08](guides/08-overfitting-and-splits.md).
 
 The script trains on 6, 18 and 36 tickets and prints the score on the training set and on dev.
 

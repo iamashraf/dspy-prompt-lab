@@ -31,7 +31,7 @@ Every row starts from the same baseline of 69.4% test, except 06 and 07, which u
 | 12 | `COPRO` | 66.7% | 50,261 | 2,613 | 225 s |
 | 02 | Baseline only (dev 72.2%) | 69.4% | 16,438 | 953 | 90 s |
 | 06 | Judge vs containment, on 18 questions | 94% vs 89% | 10,814 | 2,473 | 129 s |
-| 07 | RAG, `BootstrapFewShot`, on 18 questions | 88.9% to 83.3% | 53,491 | 4,272 | 331 s |
+| 07 | RAG, `BootstrapFewShot`, on 18 dev questions | 88.9% to 83.3% | 53,131 | 3,956 | 479 s |
 | 01 | Prompt walkthrough | not scored | 1,055 | 219 | 16 s |
 
 Example 08 also prints train and dev scores for 6, 18 and 36 training tickets. See the [walkthrough](walkthrough.md#step-16-catch-overfitting-08_overfitting_and_splitspy).

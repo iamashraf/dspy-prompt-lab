@@ -11,18 +11,21 @@ from dspy_prompt_lab.lm import token_usage
 RESULTS = Path("artifacts/results.jsonl")
 
 
-def print_result(name: str, baseline: float, after: float, lm: dspy.LM, started: float) -> None:
+def print_result(
+    name: str, baseline: float, after: float, lm: dspy.LM, started: float, split: str = "test"
+) -> None:
     """Print the before/after line and append it to artifacts/results.jsonl."""
     prompt, completion = token_usage()
     seconds = time.time() - started
     print(
-        f"\nRESULT {name}: test {baseline:.1f}% -> {after:.1f}%  "
+        f"\nRESULT {name}: {split} {baseline:.1f}% -> {after:.1f}%  "
         f"({prompt:,} prompt + {completion:,} completion tokens, {seconds:.0f}s, {lm.model})"
     )
     RESULTS.parent.mkdir(exist_ok=True)
     with open(RESULTS, "a", encoding="utf-8") as f:
         row = dict(
             example=name,
+            split=split,
             baseline=baseline,
             after=after,
             prompt_tokens=prompt,

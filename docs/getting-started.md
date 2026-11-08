@@ -74,7 +74,7 @@ You should see the dataset sizes, a baseline score, and the first few mistakes. 
 RESULT 03_bootstrap_fewshot: test 69.4% -> 86.1%  (62,063 prompt + 1,566 completion tokens, 175s, ollama_chat/qwen3-coder:30b)
 ```
 
-Your numbers will differ from the ones in these docs. See [results](results.md) for why. Then follow the [walkthrough](walkthrough.md), which runs the experiments in a useful order and explains what each one shows.
+Your numbers will differ from the ones in these docs. See [results](results.md) for why. Then follow the [walkthrough](walkthrough.md), which runs the experiments in a useful order and explains what each one shows. For a step-by-step view of any one example, open its [guide](guides/README.md).
 
 ## What a run writes
 

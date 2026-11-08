@@ -62,6 +62,7 @@ From a local `qwen3-coder:30b`, on 36 test tickets that start at 69.4%. Labeled 
 
 - [Getting started](docs/getting-started.md): setup, providers, running in a container
 - [Walkthrough](docs/walkthrough.md): run the experiments in order and see what each one shows
+- [Guides](docs/guides/README.md): one step-by-step, notebook-style page per example, with code and real output
 - [Concepts](docs/concepts.md): signatures, modules, metrics, optimizers, splits
 - [Optimizers](docs/optimizers.md): what each one changes and when to pick it
 - [Results](docs/results.md): numbers from the reference run and how far to trust them

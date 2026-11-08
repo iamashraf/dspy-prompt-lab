@@ -9,7 +9,7 @@ the limit of this example: if retrieval misses, no prompt fixes it. The script c
 retrieval separately so you can tell the two failure modes apart.
 
 Run:  uv run python examples/07_rag_pipeline_optimization.py
-Cost: 53,491 prompt + 4,272 completion tokens, 6 min on a local 30B model (Ollama).
+Cost: 53,131 prompt + 3,956 completion tokens, 8 min on a local 30B model (Ollama).
       Multiply by your provider's token prices for a hosted model.
 Debug: check retrieval before blaming the prompt (hit@3 below). To see the context the model got,
        call `dspy.inspect_history(n=1)` after one `program(question=...)`.
@@ -45,8 +45,9 @@ def main():
         RAG(k=3), trainset=train
     )
     after = evaluate(compiled).score
-    print_result("07_rag", baseline, after, lm, started)
-    print("Note: 12 dev questions, so one question is 8 points. Treat small moves as noise.")
+    print_result("07_rag", baseline, after, lm, started, split="dev")
+    one = 100 / len(dev)
+    print(f"Note: {len(dev)} dev questions, so one question is {one:.1f} points. Treat small moves as noise.")
 
 
 if __name__ == "__main__":
